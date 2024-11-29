@@ -10,6 +10,11 @@ function X = naive_dft(x)
     % Output:
     %   X - DFT of the input signal (1D array, complex values)
 
+    % Check if input is a vector
+    if ~isvector(x)
+        error('Input must be a vector');
+    end
+
     % Length of the input signal
     N = length(x);
     
