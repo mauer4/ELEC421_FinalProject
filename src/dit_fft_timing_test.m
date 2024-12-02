@@ -15,7 +15,7 @@ sampling_frequency = 1000;
 
 % for each size test the time it takes for the functions to run
 for i = 1:size
-    current_length = length(lengths);
+    current_length = lengths(i);
     time = (0:current_length-1) / sampling_frequency;
     sinusoid_signal = sin(2*pi*sinusoid_frequency*time);
 
@@ -25,9 +25,9 @@ for i = 1:size
     naive_dft_time(i) = toc;
 
     % start time for dit_fft
-    % tic;
-    % dit_fft(sinusoid_signal);
-    % dit_fft_time(i) = toc;
+    tic;
+    dit_fft(sinusoid_signal);
+    dit_fft_time(i) = toc;
 
     % start time for dit_fft
     tic;
