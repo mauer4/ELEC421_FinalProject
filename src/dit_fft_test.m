@@ -5,23 +5,25 @@
 % Read data from signal
 [signal,Fs] = audioread('clean_signal.wav');
 
-% Pad with zeros until it is a power of 2 
-N = max(size(signal));
-if N > 0
-    power_of_2 = 2^ceil(log2(N));
-    signal = [signal; zeros(power_of_2 - N, 1)];
+% Compute dit fft
+signal_dit_fft = dit_fft(signal);
+
+% Pad with zeros until it is a power of 2 to get matlab fft of same length
+N_orig = max(size(signal));
+if N_orig > 0
+    power_of_2 = 2^ceil(log2(N_orig));
+    signal_padded = [signal; zeros(power_of_2 - N_orig, 1)];
+    N_pad = max(size(signal_padded));
 else
     disp('Clean signal is incompatible length');
     return;
 end
-
-% Compute FFTs
-signal_fft = fft(signal);
-signal_dit_fft = dit_fft(signal);
+% Compute matlab fft
+signal_fft = fft(signal_padded);
 
 % Compute x axes in time and frequency domains 
-t = linspace(0, N/Fs, N); % seconds
-f = (-length(signal)/2:(length(signal)/2-1)) * (Fs / N); % Hz
+t = linspace(0, N_orig/Fs, N_orig); % seconds
+f = (-N_pad/2:(N_pad/2-1)) * (Fs / N_orig); % Hz
 
 % Figure formatting
 f1 = figure(1);
@@ -52,26 +54,30 @@ ax.FontSize = 12;
 % Noisy Signal
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+clear;
+
 % Read data from signal
 [signal,Fs] = audioread('noisy_signal.wav');
 
-% Pad with zeros until it is a power of 2 
-N = max(size(signal));
-if N > 0
-    power_of_2 = 2^ceil(log2(N));
-    signal = [signal; zeros(power_of_2 - N, 1)];
-else
-    disp('Noisy signal is incompatible length');
-    return;
-end
-
-% Compute FFTs
-signal_fft = fft(signal);
+% Compute dit fft
 signal_dit_fft = dit_fft(signal);
 
+% Pad with zeros until it is a power of 2 to get matlab fft of same length
+N_orig = max(size(signal));
+if N_orig > 0
+    power_of_2 = 2^ceil(log2(N_orig));
+    signal_padded = [signal; zeros(power_of_2 - N_orig, 1)];
+    N_pad = max(size(signal_padded));
+else
+    disp('Clean signal is incompatible length');
+    return;
+end
+% Compute matlab fft
+signal_fft = fft(signal_padded);
+
 % Compute x axes in time and frequency domains 
-t = linspace(0, N/Fs, N); % seconds
-f = (-length(signal)/2:(length(signal)/2-1)) * (Fs / N); % Hz
+t = linspace(0, N_orig/Fs, N_orig); % seconds
+f = (-N_pad/2:(N_pad/2-1)) * (Fs / N_orig); % Hz
 
 % Figure formatting
 f2 = figure(2);

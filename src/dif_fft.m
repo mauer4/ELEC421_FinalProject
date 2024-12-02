@@ -1,4 +1,4 @@
-function X = two_radix_dif_fft(x)
+function X = dif_fft(x)
     N = length(x);
     x = x(:); % Ensure x is a column vector
     % Check if N is a power of 2
