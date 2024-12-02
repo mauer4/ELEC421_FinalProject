@@ -1,59 +1,36 @@
-% function X = dif_fft(x)
-%     N = length(x);
-    
-%     % Step 1: Bit-reversal permutation
-%     x = bit_reverse_permute(x);
-    
-%     % Step 2: Apply DIF-FFT
-%     for stage = 1:log2(N)
-%          half_N = N / 2 
-%         for k = 1:sets
-%             W = exp(-2*pi*1i*k/N_2);  % Twiddle factor for this stage
-            
-%             for n = k:2:N
-%                 idx1 = n;
-%                 idx2 = mod(n + half_N - 1, N) + 1;  % Wrap-around index
-                
-%                 % Perform the butterfly operation
-%                 t = W * x(idx2);
-%                 x(idx2) = x(idx1) - t;
-%                 x(idx1) = x(idx1) + t;
-%             end
-%         end
-%     end
-    
-%     % Step 3: Normalize by the length of the signal
-%     X = x / N;
-% end
-
-% X is the return value of the function, representing the fourier transform of the signal
-% x is the input for the function
-function X = dif_fft(x)
+function X = two_radix_dif_fft(x)
     N = length(x);
-    half_N = N / 2;
-    
-    n_stages = log2(N);
-
-    for stage = 1: n_stages
-        sets = stage^2;
-
-        num_butterflies = half_N / sets;
-
-        nth_root = 1:num_butterflies;
-
-        W_n_set = exp(-1i*2*pi/N*nth_root);
-
-        W_n_set
-
-        for set = 1:sets
-
-            for butterfly = 1:num_butterflies
-
-            end
-
-        end
-
+    x = x(:); % Ensure x is a column vector
+    % Check if N is a power of 2
+    if mod(log2(N), 1) ~= 0
+        N_next = 2^ceil(log2(N));
+        disp("Signal length is not a power of 2. Padding with zeros to length " + N_next)
+        x = [x; zeros(N_next - N, 1)];
+        N = N_next; % Update N to the new length
     end
+    n_stages = log2(N);
+    W_N = exp(-2i * pi * (0:N/2 - 1)' / N);
+% Main loop: stages
+    for s = n_stages:-1:1
+        num_sections = 2^(n_stages - s);
+        signal_size = 2^s;
+        half_size = signal_size / 2;
+        % Calculate twiddle factor indices for this stage
+        indices = (0:(half_size - 1)) * num_sections + 1; % MATLAB indexing starts at 1
+        W = W_N(indices);
+        % Loop over each section
+        for section = 0:(num_sections - 1)
+            offset = section * signal_size;
+            idx = offset + (1:half_size);
+            idx_pair = idx + half_size;
+            % Perform butterfly operations
+            a = x(idx);
+            b = x(idx_pair);
+            % Compute butterflies
+            x(idx) = a + b;
+            x(idx_pair) = (a - b) .* W;
+        end
+    end
+    % Bit-reversal permutation
+    X = bitrevorder(x);
 end
-
-        
