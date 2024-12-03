@@ -23,8 +23,8 @@ function X = dit_fft(x)
     % Combine results using the butterfly operation
     X = zeros(1, N);
     for k = 1:(N/2)
-        twiddle = exp(-2i * pi * (k-1) / N);
-        X(k) = even_part(k) + twiddle * odd_part(k);
-        X(k + N/2) = even_part(k) - twiddle * odd_part(k);
+        W_n = exp(-2i * pi * (k-1) / N); % Twiddle factor: W_N^(k-1)*(n-1)
+        X(k) = even_part(k) + W_n * odd_part(k);
+        X(k + N/2) = even_part(k) - W_n * odd_part(k);
     end
 end
