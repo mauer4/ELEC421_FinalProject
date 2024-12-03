@@ -12,14 +12,15 @@ clear; clc;
 [noisy_signal, Fs] = audioread('noisy_signal.wav');
 
 % Compute dft of each signal using each algorithm
-clean_signal_dit_fft = dit_fft(clean_signal);
-noisy_signal_dit_fft = dit_fft(noisy_signal);
+% Shift zero-frequency component to center of spectrum
+clean_signal_dit_fft = fftshift(dit_fft(clean_signal));
+noisy_signal_dit_fft = fftshift(dit_fft(noisy_signal));
 disp("Computed DIT FFT of signals")
-clean_signal_dif_fft = dif_fft(clean_signal);
-noisy_signal_dif_fft = dif_fft(noisy_signal);
+clean_signal_dif_fft = fftshift(dif_fft(clean_signal));
+noisy_signal_dif_fft = fftshift(dif_fft(noisy_signal));
 disp("Computed DIF FFT of signals")
-clean_signal_naive_dft = naive_dft(clean_signal);
-noisy_signal_naive_dft = naive_dft(noisy_signal);
+clean_signal_naive_dft = fftshift(naive_dft(clean_signal));
+noisy_signal_naive_dft = fftshift(naive_dft(noisy_signal));
 disp("Computed Naive DFT of signals")
 
 % Find the length of the audio signals
@@ -34,7 +35,7 @@ f_dif_dit = (-N_fft/2:(N_fft/2-1)) * (Fs / N) * (N / N_fft); % Hz
 % Figure formatting
 f1 = figure(1); % Plot clean signal on left, noisy signal on right
 y_lim_top  = 4500; y_lim_bottom = -100; % Range of y for each plot
-x_lim_left = 3540; x_lim_right  = 3580; % Zoomed in x domain 
+x_lim_left = 420; x_lim_right  = 460; % Zoomed in x domain 
 linewidth = 3;
 font_size = 18;
 
@@ -49,7 +50,7 @@ title({"Clean signal - Magnitude spectrum"
 xlabel("Frequency (Hz)")
 ylabel("Magnitude of DFT")
 ylim([y_lim_bottom y_lim_top])
-legend(["DIT FFT", "DIF FFT","Naive DFT"], 'Location', 'north')
+legend(["DIT FFT", "DIF FFT","Naive DFT"], 'Location', 'best')
 ax = gca;
 ax.FontSize = font_size;
 
@@ -77,7 +78,7 @@ title({"Noisy signal - Magnitude spectrum"
 xlabel("Frequency (Hz)")
 ylabel("Magnitude of DFT")
 ylim([y_lim_bottom y_lim_top])
-legend(["DIT FFT", "DIF FFT","Naive DFT"], 'Location', 'north')
+legend(["DIT FFT", "DIF FFT","Naive DFT"], 'Location', 'best')
 ax = gca;
 ax.FontSize = font_size;
 
