@@ -7,4 +7,4 @@ Please see out source files under `./src/`. To see results, please run main.m sc
 * Reads `clean_signal.wav` and `noisy_signal.wav`.
 * Runs (1) `naive_dft.m` (2) `dif_fft.m` (3) `dif_fft.m` and the `built-in fft` on both signals
 * Plots the magnitude spectrum (+ zoomed in version) of both signals
-* Log-plots performance and runtime analysis of all version on signals of sizes 2^5 to 2^14.
+* Log-plots performance and runtime analysis of all version on signals of sizes $$2^5$$ to $$2^14$$.
