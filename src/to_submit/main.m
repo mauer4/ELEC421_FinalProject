@@ -11,7 +11,6 @@ clear; clc;
 [clean_signal, ~] = audioread('clean_signal.wav');
 [noisy_signal, Fs] = audioread('noisy_signal.wav');
 
-%{
 % Compute dft of each signal using each algorithm
 % Shift zero-frequency component to center of spectrum
 clean_signal_dit_fft = fftshift(dit_fft(clean_signal));
@@ -103,8 +102,6 @@ ylim([y_lim_bottom y_lim_top])
 legend(["DIT FFT", "DIF FFT", "Matlab FFT", "Naive DFT"], 'Location', 'best')
 ax = gca;
 ax.FontSize = font_size;
-
-%}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Computational cost analysis
