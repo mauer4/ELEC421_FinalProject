@@ -24,11 +24,11 @@ function X = dif_fft(x)
             idx = offset + (1:half_size);
             idx_pair = idx + half_size;
             % Perform butterfly operations
-            a = x(idx);
-            b = x(idx_pair);
+            bottom_hard = x(idx);
+            top_half = x(idx_pair);
             % Compute butterflies
-            x(idx) = a + b;
-            x(idx_pair) = (a - b) .* W;
+            x(idx) = bottom_half + top_half;
+            x(idx_pair) = (bottom_half - top_half) .* W;
         end
     end
     % Bit-reversal permutation
