@@ -15,9 +15,8 @@ function X = dif_fft(x)
 
 % Main loop: stages
     for s = n_stages:-1:1 % Start at n_stages and decrements by 1 until we reach 1
-        % Every stage (out of logN) has a certain number of sub-signals
+        % Every stage (out of logN) has 
         num_subsignals = 2^(n_stages - s);
-        % Sub-signal size depends on the stage (out of logN)
         signal_size = 2^s;
         half_size = signal_size / 2;
         % Calculate twiddle factor indices for this stage
