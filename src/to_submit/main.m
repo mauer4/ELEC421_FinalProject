@@ -75,10 +75,10 @@ ax.FontSize = font_size;
 
 subplot(2,2,2);
 hold on 
-plot(f_dif_dit, abs(clean_signal_dit_fft), 'Linewidth', linewidth);
-plot(f_dif_dit, abs(clean_signal_dif_fft), 'Linewidth', linewidth, 'LineStyle', '--');
-plot(f_dft, abs(clean_signal_fft), 'Linewidth', linewidth);
-plot(f_dft, abs(clean_signal_naive_dft), 'Linewidth', linewidth, 'LineStyle', ':');
+plot(f_dif_dit, abs(noisy_signal_dit_fft), 'Linewidth', linewidth);
+plot(f_dif_dit, abs(noisy_signal_dif_fft), 'Linewidth', linewidth, 'LineStyle', '--');
+plot(f_dft, abs(noisy_signal_fft), 'Linewidth', linewidth);
+plot(f_dft, abs(noisy_signal_naive_dft), 'Linewidth', linewidth, 'LineStyle', ':');
 title({"Noisy signal - Magnitude spectrum" 
        "Output of DFT/FFT implementations compared"})
 xlabel("Frequency (Hz)")
@@ -90,10 +90,10 @@ ax.FontSize = font_size;
 
 subplot(2,2,4);
 hold on 
-plot(f_dif_dit, abs(clean_signal_dit_fft), 'Linewidth', linewidth);
-plot(f_dif_dit, abs(clean_signal_dif_fft), 'Linewidth', linewidth, 'LineStyle', '--');
-plot(f_dft, abs(clean_signal_fft), 'Linewidth', linewidth);
-plot(f_dft, abs(clean_signal_naive_dft), 'Linewidth', linewidth, 'LineStyle', ':');
+plot(f_dif_dit, abs(noisy_signal_dit_fft), 'Linewidth', linewidth);
+plot(f_dif_dit, abs(noisy_signal_dif_fft), 'Linewidth', linewidth, 'LineStyle', '--');
+plot(f_dft, abs(noisy_signal_fft), 'Linewidth', linewidth);
+plot(f_dft, abs(noisy_signal_naive_dft), 'Linewidth', linewidth, 'LineStyle', ':');
 title("Zoomed in")
 xlabel("Frequency (Hz)")
 xlim([x_lim_left x_lim_right])
