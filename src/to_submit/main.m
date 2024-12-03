@@ -50,7 +50,7 @@ plot(f_dif_dit, abs(clean_signal_dif_fft), 'Linewidth', linewidth, 'LineStyle', 
 plot(f_dft, abs(clean_signal_fft), 'Linewidth', linewidth);
 plot(f_dft, abs(clean_signal_naive_dft), 'Linewidth', linewidth, 'LineStyle', ':');
 title({"Clean signal - Magnitude spectrum" 
-       "Output of DIT and DIF FFT compared to Naive DFT"})
+       "Output of DFT/FFT implementations compared"})
 xlabel("Frequency (Hz)")
 ylabel("Magnitude of DFT")
 ylim([y_lim_bottom y_lim_top])
@@ -80,7 +80,7 @@ plot(f_dif_dit, abs(clean_signal_dif_fft), 'Linewidth', linewidth, 'LineStyle', 
 plot(f_dft, abs(clean_signal_fft), 'Linewidth', linewidth);
 plot(f_dft, abs(clean_signal_naive_dft), 'Linewidth', linewidth, 'LineStyle', ':');
 title({"Noisy signal - Magnitude spectrum" 
-       "Output of DIT and DIF FFT compared to Naive DFT"})
+       "Output of DFT/FFT implementations compared"})
 xlabel("Frequency (Hz)")
 ylabel("Magnitude of DFT")
 ylim([y_lim_bottom y_lim_top])
@@ -170,7 +170,7 @@ xticklabels("2^{"+log2(lengths)+"}"); % Label ticks as log2(lengths)
 xlabel("Signal Input Size (Log Base 2)");
 ylabel("Execution Time (s)");
 legend("DIT FFT", "DIF FFT", "Matlab FFT", "Naive DFT", 'Location', 'northwest');
-title("Time comparison for Naive DFT vs DIF FFT vs DIT FFT");
+title("Time comparison for DFT/FFT Implementations");
 grid on;
 % Add grid lines to improve readability
 grid minor;
