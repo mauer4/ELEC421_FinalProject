@@ -1,4 +1,4 @@
-% Main driver script for producing all plots including in report 
+% Main driver script for producing all plots included in report 
 
 close all;
 clear; clc;
