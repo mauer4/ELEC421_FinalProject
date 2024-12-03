@@ -143,7 +143,7 @@ for i = 1:num_tests
 
     % start time to matlab fft
     tic;
-    fft(signal(:))
+    fft(signal(:));
     fft_time(i) = toc;
 end
 
@@ -159,7 +159,7 @@ f2 = figure(2);
 loglog(lengths, dit_fft_time,   "o-", ...  % DIT FFT
        lengths, dif_fft_time,  "o--", ...  % DIF FFT
        lengths, fft_time, "o-", ... % Matlab FFT
-       lengths, naive_dft_time, "o:", ...  % Naive DFT
+       lengths, naive_dft_time, "o--", ...  % Naive DFT
        'Linewidth', 2);     
 
 % Update x-axis to log base 2
