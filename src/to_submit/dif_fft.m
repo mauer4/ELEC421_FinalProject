@@ -30,11 +30,7 @@ function X = dif_fft(x)
             idx = offset + (1:half_size);
             idx_pair = idx + half_size;
             % Perform butterfly operations
-<<<<<<< HEAD
-            bottom_hard = x(idx);
-=======
             bottom_half = x(idx);
->>>>>>> c450798fd5fb1a6f234b428ab678153bbda32ad6
             top_half = x(idx_pair);
             % Compute butterflies
             x(idx) = bottom_half + top_half;
