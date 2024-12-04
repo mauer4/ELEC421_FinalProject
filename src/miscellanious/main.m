@@ -4,7 +4,7 @@
 [noisy_signal, fs] = audioread('noisy_signal.wav');
 [clean_signal, ~] = audioread('clean_signal.wav');
 
-% Select a segment for analysis (optional)
+% Select a segment for analysis
 noisy_signal = noisy_signal(1:1024);
 clean_signal = clean_signal(1:1024);
 
